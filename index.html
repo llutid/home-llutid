@@ -1,339 +1,648 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Llutid+</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');  
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Llutid+</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      background-color: #121212;
-      font-family: 'Roboto', sans-serif;
-      color: white;
-      overflow-x: hidden;
-      font-size: 16px;
-    }
+        body {
+            background-color: #121212;
+            font-family: 'Roboto', sans-serif;
+            color: white;
+            overflow-x: hidden;
+            font-size: 16px;
+        }
 
-    /* Pantalla de inicio */
-    .intro-screen {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
+        /* Pantalla de inicio */
+        .intro-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
 
-    .logo-container {
-      font-size: 4rem;
-      font-weight: bold;
-      color: #00bfff;
-      opacity: 0;
-      animation: aparecer 2s ease forwards, desaparecer 1s ease forwards 4s;
-      text-shadow: 0 0 10px #00bfff88, 0 0 20px #00bfff44;
-      font-family: 'Montserrat', sans-serif;
-      letter-spacing: 4px;
-    }
+        .logo-container {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #00bfff;
+            opacity: 0;
+            animation: aparecer 2s ease forwards, desaparecer 1s ease forwards 4s;
+            text-shadow: 0 0 10px #00bfff88, 0 0 20px #00bfff44;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 4px;
+        }
 
-    .logo-container span {
-      color: white;
-    }
+        .logo-container span {
+            color: white;
+        }
 
-    @keyframes aparecer {
-      0% {
-        opacity: 0;
-        transform: scale(0.5);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
+        @keyframes aparecer {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-    @keyframes desaparecer {
-      to {
-        opacity: 0;
-        transform: scale(1.05);
-      }
-    }
+        @keyframes desaparecer {
+            to {
+                opacity: 0;
+                transform: scale(1.05);
+            }
+        }
 
-    /* Main content */
-    .main-content {
-      display: none;
-      padding-top: 20px;
-    }
+        /* Main content */
+        .main-content {
+            display: none;
+            padding-top: 20px;
+        }
 
-    /* Barra fija */
-    .sticky-bar {
-      position: sticky;
-      top: 0;
-      background-color: rgba(18, 18, 18, 0.8);
-      padding: 20px 0;
-      z-index: 100;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 4px 10px rgba(0, 191, 255, 0.3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
+        /* Barra fija */
+        .sticky-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(18, 18, 18, 0.8);
+            padding: 15px 20px;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 191, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    .sticky-bar h1 {
-      font-size: 2.5rem;
-      color: #00bfff;
-      text-transform: uppercase;
-      font-family: 'Montserrat', sans-serif;
-      letter-spacing: 5px;
-      margin-bottom: 15px;
-    }
+        .logo-bar {
+            display: flex;
+            align-items: center;
+        }
 
-    .sticky-bar h1 span {
-      color: white;
-    }
+        .logo-bar h1 {
+            font-size: 2.5rem;
+            color: #00bfff;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 5px;
+            margin-bottom: 0;
+            margin-right: 20px;
+        }
 
-    .sticky-bar input {
-      padding: 12px 20px;
-      width: 80%;
-      max-width: 450px;
-      font-size: 16px;
-      border-radius: 25px;
-      border: 2px solid #4e5d6a;
-      outline: none;
-      background-color: #2a2a2a;
-      color: white;
-      transition: all 0.3s ease;
-    }
+        .logo-bar h1 span {
+            color: white;
+        }
 
-    .sticky-bar input:focus {
-      border-color: #00bfff;
-      box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
-    }
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
 
-    .sticky-bar input::placeholder {
-      color: #888;
-    }
+        .sticky-bar input {
+            padding: 12px 20px;
+            width: 200px;
+            font-size: 16px;
+            border-radius: 25px;
+            border: 2px solid #4e5d6a;
+            outline: none;
+            background-color: #2a2a2a;
+            color: white;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+        }
 
-    /* Carrusel */
-    .slider-container {
-      position: relative;
-      width: 100%;
-      height: 450px;
-      overflow: hidden;
-      margin-bottom: 30px;
-      border-bottom: 5px solid #555;
-    }
+        .sticky-bar input:focus {
+            border-color: #00bfff;
+            box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
+        }
 
-    .slider {
-      display: flex;
-      width: 300%;
-      animation: slide 30s infinite;
-    }
+        .sticky-bar input::placeholder {
+            color: #888;
+        }
 
-    .slider img {
-      width: 33.33%;
-      height: 100%;
-      object-fit: cover;
-    }
+        /* Icono del menú */
+        .menu-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 22px;
+            cursor: pointer;
+        }
 
-    @keyframes slide {
-      0% { transform: translateX(0); }
-      33% { transform: translateX(-100%); }
-      66% { transform: translateX(-200%); }
-      100% { transform: translateX(0); }
-    }
+        .menu-icon div {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
 
-    /* Películas */
-    .movie-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
+        /* Menú desplegable */
+        .menu-dropdown {
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background-color: rgba(18, 18, 18, 0.9);
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(5px);
+            box-shadow: -8px 8px 10px rgba(0, 191, 255, 0.2);
+            z-index: 101;
+            border-radius: 5px;
+        }
 
-    .movie {
-      background-color: #3a3a3a;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-      overflow: hidden;
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
-    }
+        .menu-dropdown a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            text-align: center;
+            display: block;
+        }
 
-    .movie:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0, 191, 255, 0.3);
-    }
+        .menu-dropdown a:hover {
+            color: #00bfff;
+        }
 
-    .movie img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-    }
+        /* Carrusel */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border-bottom: 5px solid #555;
+        }
 
-    .movie p {
-      padding: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #d3d3d3;
-    }
+        .slider {
+            display: flex;
+            width: 300%;
+            animation: slide 30s infinite;
+        }
 
-    /* Eliminar subrayado en los enlaces de las películas */
-    .movie a {
-      text-decoration: none;
-    }
+        .slider img {
+            width: 33.33%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      .slider-container {
-        height: 250px;
-      }
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            33% { transform: translateX(-100%); }
+            66% { transform: translateX(-200%); }
+            100% { transform: translateX(0); }
+        }
 
-      .sticky-bar h1 {
-        font-size: 2rem;
-      }
+        /* Estilos para el Top 10 */
+        .top-10-container {
+            padding: 20px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #555;
+        }
 
-      .sticky-bar input {
-        font-size: 14px;
-        padding: 10px;
-      }
+        .top-10-container h2 {
+            color: #00bfff;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 15px;
+            font-size: 2rem;
+            text-align: center;
+        }
 
-      .movie-container {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      }
+        .top-10-container h2 span {
+            color: white; /* Estilo para el "+" en el título */
+        }
 
-      .movie p {
-        font-size: 14px;
-      }
-    }
-  </style>
+        .top-10-list {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 15px;
+        }
+
+        .top-10-list .movie-top-10 {
+            background-color: #3a3a3a;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+            width: 150px;
+            flex-shrink: 0;
+        }
+
+        .top-10-list .movie-top-10:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 191, 255, 0.3);
+        }
+
+        .movie-top-10-image-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .movie-top-10-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .top-10-badge {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1E90FF; /* Azul intermedio (Dodger Blue) */
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .top-10-list .movie-top-10 p {
+            padding: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #d3d3d3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .top-10-list .movie-top-10 a {
+            text-decoration: none;
+        }
+
+        /* Películas */
+        .movie-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .movie {
+            background-color: #3a3a3a;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        }
+
+        .movie:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 191, 255, 0.3);
+        }
+
+        .movie img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .movie p {
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #d3d3d3;
+        }
+
+        .movie a {
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sticky-bar input {
+                width: 180px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sticky-bar {
+                padding: 10px 15px;
+            }
+
+            .logo-bar h1 {
+                font-size: 2rem;
+                margin-right: 10px;
+            }
+
+            .sticky-bar input {
+                width: 120px;
+                font-size: 14px;
+                padding: 8px 10px;
+                margin-right: 5px;
+            }
+
+            .menu-icon {
+                width: 25px;
+                height: 18px;
+            }
+
+            .menu-dropdown {
+                top: 50px;
+                right: 15px;
+                padding: 15px;
+                gap: 10px;
+            }
+
+            .menu-dropdown a {
+                font-size: 1rem;
+            }
+
+            .slider-container {
+                height: 250px;
+            }
+
+            .movie-container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .movie p {
+                font-size: 14px;
+            }
+
+            .top-10-container h2 {
+                font-size: 1.5rem;
+            }
+
+            .top-10-list .movie-top-10 {
+                width: 120px;
+            }
+
+            .top-10-list .movie-top-10 img {
+                height: 160px;
+            }
+
+            .top-10-list .movie-top-10 p {
+                font-size: 12px;
+            }
+
+            .top-10-badge {
+                font-size: 0.8rem;
+                padding: 3px 0;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Intro -->
-  <div class="intro-screen">
-    <div class="logo-container">Llutid<span>+</span></div>
-  </div>
-
-  <!-- Contenido -->
-  <div class="main-content">
-    
-    <!-- Carrusel -->
-    <div class="slider-container">
-      <div class="slider">
-        <img src="https://i.postimg.cc/FHxXMQSq/result-LLUTID-FONDO.jpg" alt="Anuncio 1">
-        <img src="https://i.postimg.cc/9QbHgCPg/result-llutid-cine-streaming.png">
-        <img src="https://i.postimg.cc/JhRz9q2r/result-Black-White-Bold-Movie-Night-Landscape-Banner.png">
-        <img src="https://i.postimg.cc/V5yCMtLJ/result-Portada-para-P-gina-de-Facebook-de-Cine-al-Aire-Libre-con-Foto-Retro.png" alt="Anuncio 1">
-        <img src="https://i.postimg.cc/9QbHgCPg/result-llutid-cine-streaming.png">
-        <img src="https://i.postimg.cc/JhRz9q2r/result-Black-White-Bold-Movie-Night-Landscape-Banner.png">
-        <img src="https://i.postimg.cc/V5yCMtLJ/result-Portada-para-P-gina-de-Facebook-de-Cine-al-Aire-Libre-con-Foto-Retro.png">
-        <img src="https://i.postimg.cc/FHxXMQSq/result-LLUTID-FONDO.jpg">
-      </div>
+    <div class="intro-screen">
+        <div class="logo-container">Llutid<span>+</span></div>
     </div>
 
-    <!-- Barra Sticky -->
-    <div class="sticky-bar">
-      <h1>Llutid<span>+</span></h1>
-      <input type="text" id="search" placeholder="Buscar película..." onkeyup="buscarPelicula()">
+    <div class="main-content">
+
+        <div class="sticky-bar">
+            <div class="logo-bar">
+                <h1>Llutid<span>+</span></h1>
+            </div>
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Buscar película..." onkeyup="buscarPelicula()">
+                <div class="menu-icon" onclick="toggleMenu()">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-dropdown" id="menuDropdown">
+            <a href="index.html">HOME</a>
+            <a href="recientemente_agregado.html">RECIEN AGREGADO</a>
+            <a href="proximos_lanzamientos.html">PROXIMAS EN LANZAMIENTO</a>
+            <a href="streaming_nuevos.html">EN VIVO STREAMING DE NUEVAS LANZAMIENTOS</a>
+        </div>
+
+        <div class="slider-container">
+            <div class="slider">
+                <img src="https://i.postimg.cc/FHxXMQSq/result-LLUTID-FONDO.jpg" alt="Anuncio 1">
+                <img src="https://i.postimg.cc/9QbHgCPg/result-llutid-cine-streaming.png">
+                <img src="https://i.postimg.cc/JhRz9q2r/result-Black-White-Bold-Movie-Night-Landscape-Banner.png">
+                <img src="https://i.postimg.cc/V5yCMtLJ/result-Portada-para-P-gina-de-Facebook-de-Cine-al-Aire-Libre-con-Foto-Retro.png" alt="Anuncio 1">
+                <img src="https://i.postimg.cc/9QbHgCPg/result-llutid-cine-streaming.png">
+                <img src="https://i.postimg.cc/JhRz9q2r/result-Black-White-Bold-Movie-Night-Landscape-Banner.png">
+                <img src="https://i.postimg.cc/V5yCMtLJ/result-Portada-para-P-gina-de-Facebook-de-Cine-al-Aire-Libre-con-Foto-Retro.png">
+                <img src="https://i.postimg.cc/FHxXMQSq/result-LLUTID-FONDO.jpg">
+            </div>
+        </div>
+
+        <div class="top-10-container">
+            <h2>Top 10 Películas Llutid<span>+</span></h2><div class="top-10-list" id="top-10-list">
+                <div class="movie-top-10">
+                    <a href="https://llutid.github.io/la-razon-de-estar-2/">
+                        <div class="movie-top-10-image-container">
+                            <img src="https://i.postimg.cc/J46hQBmd/la-razon-2.png" alt="LA RAZON DE ESTAR CONTIGO 2">
+                            <div class="top-10-badge">Top 10</div>
+                        </div>
+                        <p>LA RAZON DE ESTAR CONTIGO 2</p>
+                    </a>
+                </div>
+                <div class="movie-top-10">
+                    <a href="https://llutid.github.io/la-pasion-de-cristo/">
+                        <div class="movie-top-10-image-container">
+                            <img src="https://i.postimg.cc/T1VgLD5J/result-la-pasion-de-cristo.jpg" alt="THE PASSION">
+                            <div class="top-10-badge">Top 10</div>
+                        </div>
+                        <p>THE PASSION</p>
+                    </a>
+                </div>
+                <div class="movie-top-10">
+                    <a href="https://llutid.github.io/pata-de-guerra/">
+                        <div class="movie-top-10-image-container">
+                            <img src="https://i.postimg.cc/3rj42RdP/en-pie-de-guerra.png" alt="EN PIE PATA ">
+                            <div class="top-10-badge">Top 10</div>
+                        </div>
+                        <p>EN PIE PATA DE GUERRA</p>
+                    </a>
+                </div>
+                <div class="movie-top-10">
+                    <a href="ENLACE_PELICULA_4">
+                        <div class="movie-top-10-image-container">
+                            <img src="https://i.postimg.cc/tCYbpvQ2/un-gran-chico.png" alt="UN GRAN CHICO">
+                            <div class="top-10-badge">Top 10</div>
+                        </div>
+                        <p>UN GRAN CHICO</p>
+                    </a>
+                </div>
+                <div class="movie-top-10">
+                    <a href="https://llutid.github.io/terrifer-1/">
+                        <div class="movie-top-10-image-container">
+                            <img src="https://i.postimg.cc/GpYhr7DZ/terrifer-1.png" alt="TERRIFER">
+                            <div class="top-10-badge">Top 10</div>
+                        </div>
+                        <p>TERIFER</p>
+                    </a>
+                </div>
+                <div class="movie-top-10">
+                    <a href="https://llutid.github.io/la-exorcista-/">
+                        <div class="movie-top-10-image-container">
+                            <img src="https://i.postimg.cc/C5vwJWyf/la-exorcista.png" alt="LA EXORCISTA">
+                            <div class="top-10-badge">Top 10</div>
+                        </div>
+                        <p>LA EXORCISTA</p>
+                    </a>
+                </div>
+                <div class="movie-top-10">
+                    <a href="https://llutid.github.io/encanto-peli/">
+                        <div class="movie-top-10-image-container">
+                            <img src="https://i.postimg.cc/QCnrc15Q/encanto.png" alt="LA EXORCISTA">
+                            <div class="top-10-badge">Top 10</div>
+                        </div>
+                        <p>ENCANTO</p>
+                    </a>
+                </div>
+                <div class="movie-top-10">
+                    <a href="https://llutid.github.io/ole-el-viaje-de-ferdinad-/">
+                        <div class="movie-top-10-image-container">
+                            <img src="https://i.postimg.cc/J0D3jpwP/ole-viaje-de-ferdinad.png" alt="ENCANTO">
+                            <div class="top-10-badge">Top 10</div>
+                        </div>
+                        <p>OLE</p>
+                    </a>
+                </div>
+                <div class="movie-top-10">
+                    <a href="https://llutid.github.io/sgt-stuby-/">
+                        <div class="movie-top-10-image-container">
+                            <img src="https://i.postimg.cc/0Q3DzHjP/sgt-stuby.png" alt="OLE">
+                            <div class="top-10-badge">Top 10</div>
+                        </div>
+                        <p>SARGENTO STUBBY</p>
+                    </a>
+                </div>
+                <div class="movie-top-10">
+                    <a href="https://llutid.github.io/intensamente-2/">
+                        <div class="movie-top-10-image-container">
+                            <img src="https://i.postimg.cc/DfH1cd7w/o3413284-16754682.png" alt="SARGENTO STUBY">
+                            <div class="top-10-badge">Top 10</div>
+                        </div>
+                        <p>INTENSAMENTE 2</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="movie-container" id="movie-container">
+            </div>
+
+        <script>
+            // Mostrar contenido después de 5 segundos (ajuste para la animación)
+            setTimeout(() => {
+                document.querySelector('.intro-screen').style.display = 'none';
+                document.querySelector('.main-content').style.display = 'block';
+            }, 5000);
+
+            const peliculasOriginales = [
+                { title: "Intensamente 2", image: "https://i.postimg.cc/DfH1cd7w/o3413284-16754682.png", link: "https://llutid.github.io/intensamente-2/" },
+                { title: "Las Rubias", image: "https://i.postimg.cc/rsrWDzWH/rubias.png", link: "https://llutid.github.io/y-donde-estan-las-rubias-/" },
+                { title: "Virus", image: "https://i.postimg.cc/Pfg1hc0M/virus.png", link: "https://llutid.github.io/virus-peli/" },
+                { title: "Olé, El Viaje de Ferdinand", image: "https://i.postimg.cc/J0D3jpwP/ole-viaje-de-ferdinad.png", link: "https://llutid.github.io/ole-el-viaje-de-ferdinad-/" },
+                { title: "Sgt. Stubby", image: "https://i.postimg.cc/0Q3DzHjP/sgt-stuby.png", link: "https://llutid.github.io/sgt-stuby-/" },
+                { title: "Un Don Excepcional", image: "https://i.postimg.cc/WzWKqVrt/un-don-exepcional.png", link: "https://llutid.github.io/un-don-excepcional-/" },
+                { title: "En Pie de Guerra", image: "https://i.postimg.cc/3rj42RdP/en-pie-de-guerra.png", link: "https://llutid.github.io/pata-de-guerra/" },
+                { title: "Tiburón Toro 2", image: "https://i.postimg.cc/K8j1XDJ2/tiburon-toro-2.png", link: "https://llutid.github.io/tiburon-toro-/" },
+                { title: "La Razón de Estar Contigo 1", image: "https://i.postimg.cc/Y2x0hsP7/la-razon-1.png", link: "https://llutid.github.io/la-razon-de-estar-contigo-1/" },
+                { title: "La Razón de Estar Contigo 2", image: "https://i.postimg.cc/J46hQBmd/la-razon-2.png", link: "https://llutid.github.io/la-razon-de-estar-2/" },
+                { title: "Terrifer 1", image: "https://i.postimg.cc/GpYhr7DZ/terrifer-1.png", link: "https://llutid.github.io/terrifer-1/" },
+                { title: "La Exorcista", image: "https://i.postimg.cc/C5vwJWyf/la-exorcista.png", link: "https://llutid.github.io/la-exorcista-/" },
+                { title: "EL Retador", image: "https://i.postimg.cc/XvDqpjSG/result-el-retador.jpg", link: "https://llutid.github.io/el-retador-/" },
+                { title: "El Paseo 5", image: "https://i.postimg.cc/Qdmv7p3H/paseo-5.png", link: "https://llutid.github.io/el-paseo-5/" },
+                { title: "El Paseo 6", image: "https://i.postimg.cc/6ptyPbf3/result-el-paseo-6.png", link: "https://llutid.github.io/el-paseo-6-peli/" },
+                { title: "El Paseo 7", image: "https://i.postimg.cc/5ttTS64p/paseo-7.png", link: "https://llutid.github.io/el-paseo-7/" },
+                { title: "vals", image: "https://i.postimg.cc/15xgG3gD/result-vals.jpg", link: "https://llutid.github.io/vals-la-peli/" },
+                { title: "Dios Cambió su Vida", image: "https://i.postimg.cc/BQshCXND/dios-cambio-su-vida.png", link: "https://llutid.github.io/dios-cambio-su-vida-para-siempre/" },
+                { title: "la pasion de cristo", image: "https://i.postimg.cc/T1VgLD5J/result-la-pasion-de-cristo.jpg ", link: "https://llutid.github.io/la-pasion-de-cristo/" },
+                { title: "Encanto", image: "https://i.postimg.cc/QCnrc15Q/encanto.png", link: "https://llutid.github.io/encanto-peli/" },
+                { title: "Un Gran Chico", image: "https://i.postimg.cc/tCYbpvQ2/un-gran-chico.png", link: "https://llutid.github.io/un-gran-chico-/" },
+                { title: "Camp Cool Kids", image: "https://i.postimg.cc/0ySqJ6NS/camp-cool-kids.png", link: "https://llutid.github.io/camp-cool-kids/" },
+                { title: "El robo perfecto", image: "https://i.postimg.cc/BQC2J20q/result-el-robo-perfecto.png", link: "https://llutid.github.io/el-robo-perfecto-la-pelicula/" },
+                { title: "El Gran Asalto", image: "https://i.postimg.cc/fL84hm8G/asalto-al-furgon.png", link: "https://llutid.github.io/asalto-al-furgon-blindado-/" },
+                { title: "Patos", image: "https://i.postimg.cc/66GsP2dm/patos.png", link: "https://llutid.github.io/patos-la/" },
+                { title: "Viaje Mágico", image: "https://i.postimg.cc/0j4LzxRZ/fautland.png", link: "https://llutid.github.io/fauntland-peli/" },
+                { title: "Hacker", image: "https://i.postimg.cc/zXLs9LKQ/hacker.png", link: "https://llutid.github.io/hacker-pelicula/" },
+                { title: "Reveldes a Los 16", image: "https://i.postimg.cc/g2snbygK/result-reveldes-a-los-16.jpg", link: "https://llutid.github.io/reveldes-a-los-16/" },
+                { title: "Hombre Araña", image: "https://i.postimg.cc/GtnXV2CW/hombre-ara-a.png", link: "https://llutid.github.io/hombre-ara-a-2/" },
+                { title: "Perro Rokero 2", image: "https://i.postimg.cc/tJ8MX5WM/perro-rokero-2.png", link: "https://llutid.github.io/perro-rokero-2/" },
+                { title: "turistas", image: "https://i.postimg.cc/nhR7DZrg/result-TURISTAS.jpg", link: "https://llutid.github.io/turistas-la-pelicula/" },
+                { title: "El Voto", image: "https://i.postimg.cc/V6gwL3kH/el-voto.png", link: "https://llutid.github.io/el-voto-pelicula/" },
+                { title: "Instakiller", image: "https://i.postimg.cc/J4nrt4J3/instakiller.png", link: "https://llutid.github.io/instakiller-peli/" },
+                { title: "Leny", image: "https://i.postimg.cc/7LvwB3RX/leny.png", link: "https://llutid.github.io/leny-el-perro/" },
+                { title: "2 Tontos", image: "https://i.postimg.cc/yNFB2J4K/2-tontos.png", link: "https://llutid.github.io/2-tontos-todavia-mas-tontos/" },
+                { title: "It 2", image: "https://i.postimg.cc/2SrP30gs/payaso-it.png", link: "https://llutid.github.io/payaso-it-/" },
+                { title: "Desastre: La Película", image: "https://i.postimg.cc/7YyRQBP5/desastre-pelicula.png", link: "https://llutid.github.io/desastre-de-la-pelicula/" }
+            ];
+
+            // Función para mostrar las películas
+            function mostrarPeliculas(peliculas) {
+                const container = document.getElementById('movie-container');
+                container.innerHTML = ''; // Limpiar el contenedor
+
+                peliculas.forEach(pelicula => {
+                    const div = document.createElement('div');
+                    div.classList.add('movie');
+                    div.innerHTML = `
+                        <a href="${pelicula.link}">
+                            <img src="${pelicula.image}" alt="${pelicula.title}">
+                            <p>${pelicula.title}</p>
+                        </a>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+
+            // Filtrar películas
+            function buscarPelicula() {
+                const search = document.getElementById('search').value.toLowerCase();
+                const peliculasFiltradas = peliculasOriginales.filter(pelicula =>
+                    pelicula.title.toLowerCase().includes(search)
+                );
+                mostrarPeliculas(peliculasFiltradas);
+            }
+
+            // Mostrar todas las películas inicialmente
+            mostrarPeliculas(peliculasOriginales);
+
+            // Función para mostrar/ocultar el menú desplegable
+            function toggleMenu() {
+                const menu = document.getElementById('menuDropdown');
+                menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+            }
+        </script>
+
     </div>
-
-    <!-- Películas -->
-    <div class="movie-container" id="movie-container"></div>
-
-    <script>
-      // Mostrar contenido después de 5.5s
-      setTimeout(() => {
-        document.querySelector('.intro-screen').style.display = 'none';
-        document.querySelector('.main-content').style.display = 'block';
-      }, 5500);
-
-      const peliculasOriginales = [
-        { title: "Intensamente 2", image: "https://i.postimg.cc/DfH1cd7w/o3413284-16754682.png", link: "https://llutid.github.io/intensamente-2/" },
-        { title: "Las Rubias", image: "https://i.postimg.cc/rsrWDzWH/rubias.png", link: "https://llutid.github.io/y-donde-estan-las-rubias-/" },
-        { title: "Virus", image: "https://i.postimg.cc/Pfg1hc0M/virus.png", link: "https://llutid.github.io/virus-peli/" },
-        { title: "Olé, El Viaje de Ferdinand", image: "https://i.postimg.cc/J0D3jpwP/ole-viaje-de-ferdinad.png", link: "https://llutid.github.io/ole-el-viaje-de-ferdinad-/" },
-        { title: "Sgt. Stubby", image: "https://i.postimg.cc/0Q3DzHjP/sgt-stuby.png", link: "https://llutid.github.io/sgt-stuby-/" },
-        { title: "Un Don Excepcional", image: "https://i.postimg.cc/WzWKqVrt/un-don-exepcional.png", link: "https://llutid.github.io/un-don-excepcional-/" },
-        { title: "En Pie de Guerra", image: "https://i.postimg.cc/3rj42RdP/en-pie-de-guerra.png", link: "https://llutid.github.io/pata-de-guerra/" },
-        { title: "Tiburón Toro 2", image: "https://i.postimg.cc/K8j1XDJ2/tiburon-toro-2.png", link: "https://llutid.github.io/tiburon-toro-/" },
-        { title: "La Razón de Estar Contigo 1", image: "https://i.postimg.cc/Y2x0hsP7/la-razon-1.png", link: "https://llutid.github.io/la-razon-de-estar-contigo-1/" },
-        { title: "La Razón de Estar Contigo 2", image: "https://i.postimg.cc/J46hQBmd/la-razon-2.png", link: "https://llutid.github.io/la-razon-de-estar-2/" },
-        { title: "Terrifer 1", image: "https://i.postimg.cc/GpYhr7DZ/terrifer-1.png", link: "https://llutid.github.io/terrifer-1/" },
-        { title: "La Exorcista", image: "https://i.postimg.cc/C5vwJWyf/la-exorcista.png", link: "https://llutid.github.io/la-exorcista-/" },
-        { title: "EL Retador", image: "https://i.postimg.cc/XvDqpjSG/result-el-retador.jpg", link: "https://llutid.github.io/el-retador-/" },
-        { title: "Desvastación", image: "https://i.postimg.cc/rF8Jr7FN/desvastacion.png", link: "https://llutid.github.io/huracan-searson/" },
-        { title: "El Paseo 5", image: "https://i.postimg.cc/Qdmv7p3H/paseo-5.png", link: "https://llutid.github.io/el-paseo-5/" },
-        { title: "El Paseo 6", image: "https://i.postimg.cc/6ptyPbf3/result-el-paseo-6.png", link: "https://llutid.github.io/el-paseo-6-peli/" },
-        { title: "El Paseo 7", image: "https://i.postimg.cc/5ttTS64p/paseo-7.png", link: "https://llutid.github.io/el-paseo-7/" },
-        { title: "vals", image: "https://i.postimg.cc/15xgG3gD/result-vals.jpg", link: "https://llutid.github.io/vals-la-peli/" },
-        { title: "Dios Cambió su Vida", image: "https://i.postimg.cc/BQshCXND/dios-cambio-su-vida.png", link: "https://llutid.github.io/dios-cambio-su-vida-para-siempre/" },
-        { title: "la pasion de cristo", image: "https://i.postimg.cc/T1VgLD5J/result-la-pasion-de-cristo.jpg ", link: "https://llutid.github.io/la-pasion-de-cristo/" },
-        { title: "Encanto", image: "https://i.postimg.cc/QCnrc15Q/encanto.png", link: "https://llutid.github.io/encanto-peli/" },
-        { title: "Un Gran Chico", image: "https://i.postimg.cc/tCYbpvQ2/un-gran-chico.png", link: "https://llutid.github.io/un-gran-chico-/" },
-        { title: "Camp Cool Kids", image: "https://i.postimg.cc/0ySqJ6NS/camp-cool-kids.png", link: "https://llutid.github.io/camp-cool-kids/" },
-        { title: "El robo perfecto", image: "https://i.postimg.cc/BQC2J20q/result-el-robo-perfecto.png", link: "https://llutid.github.io/el-robo-perfecto-la-pelicula/" },
-        { title: "El Gran Asalto", image: "https://i.postimg.cc/fL84hm8G/asalto-al-furgon.png", link: "https://llutid.github.io/asalto-al-furgon-blindado-/" },
-        { title: "Patos", image: "https://i.postimg.cc/66GsP2dm/patos.png", link: "https://llutid.github.io/patos-la/" },
-        { title: "Viaje Mágico", image: "https://i.postimg.cc/0j4LzxRZ/fautland.png", link: "https://llutid.github.io/fauntland-peli/" },
-        { title: "Hacker", image: "https://i.postimg.cc/zXLs9LKQ/hacker.png", link: "https://llutid.github.io/hacker-pelicula/" },
-        { title: "Reveldes a Los 16", image: "https://i.postimg.cc/g2snbygK/result-reveldes-a-los-16.jpg", link: "https://llutid.github.io/reveldes-a-los-16/" },
-        { title: "Hombre Araña", image: "https://i.postimg.cc/GtnXV2CW/hombre-ara-a.png", link: "https://llutid.github.io/hombre-ara-a-2/" },
-        { title: "Perro Rokero 2", image: "https://i.postimg.cc/tJ8MX5WM/perro-rokero-2.png", link: "https://llutid.github.io/perro-rokero-2/" },
-        { title: "turistas", image: "https://i.postimg.cc/nhR7DZrg/result-TURISTAS.jpg", link: "https://llutid.github.io/turistas-la-pelicula/" },
-        { title: "El Voto", image: "https://i.postimg.cc/V6gwL3kH/el-voto.png", link: "https://llutid.github.io/el-voto-pelicula/" },
-        { title: "Instakiller", image: "https://i.postimg.cc/J4nrt4J3/instakiller.png", link: "https://llutid.github.io/instakiller-peli/" },
-        { title: "Leny", image: "https://i.postimg.cc/7LvwB3RX/leny.png", link: "https://llutid.github.io/leny-el-perro/" },
-        { title: "2 Tontos", image: "https://i.postimg.cc/yNFB2J4K/2-tontos.png", link: "https://llutid.github.io/2-tontos-todavia-mas-tontos/" },
-        { title: "It 2", image: "https://i.postimg.cc/2SrP30gs/payaso-it.png", link: "https://llutid.github.io/payaso-it-/" },
-        { title: "Desastre: La Película", image: "https://i.postimg.cc/7YyRQBP5/desastre-pelicula.png", link: "https://llutid.github.io/desastre-de-la-pelicula/" }
-      ];
-
-      // Función para mostrar las películas
-      function mostrarPeliculas(peliculas) {
-        const container = document.getElementById('movie-container');
-        container.innerHTML = ''; // Limpiar el contenedor
-
-        peliculas.forEach(pelicula => {
-          const div = document.createElement('div');
-          div.classList.add('movie');
-          div.innerHTML = `
-            <a href="${pelicula.link}">
-              <img src="${pelicula.image}" alt="${pelicula.title}">
-              <p>${pelicula.title}</p>
-            </a>
-          `;
-          container.appendChild(div);
-        });
-      }
-
-      // Filtrar películas
-      function buscarPelicula() {
-        const search = document.getElementById('search').value.toLowerCase();
-        const peliculasFiltradas = peliculasOriginales.filter(pelicula =>
-          pelicula.title.toLowerCase().includes(search)
-        );
-        mostrarPeliculas(peliculasFiltradas);
-      }
-
-      // Mostrar todas las películas inicialmente
-      mostrarPeliculas(peliculasOriginales);
-    </script>
-
-  </div>
 
 </body>
 </html>
-
